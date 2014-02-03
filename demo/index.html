@@ -1,1 +1,294 @@
-Nothing here yet.
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demo</title>
+    <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="./js/external/handlebars-v1.3.0.js" type="text/javascript"></script>
+
+    <!-- TODO: replace with minified version -->
+    <script src="../lib/onderwijsdata/onderwijsdata.js" type="text/javascript"></script>
+    <script src="../lib/onderwijsdata/tools.js" type="text/javascript"></script>
+    <script src="../lib/onderwijsdata/models/person.js" type="text/javascript"></script>
+    <script src="../lib/onderwijsdata/models/group.js" type="text/javascript"></script>
+    <script src="../lib/onderwijsdata/models/newsfeed.js" type="text/javascript"></script>
+    <script src="../lib/onderwijsdata/models/newsitem.js" type="text/javascript"></script>
+    <script src="../lib/onderwijsdata/models/room.js" type="text/javascript"></script>
+    <script src="../lib/onderwijsdata/models/building.js" type="text/javascript"></script>
+    <script src="../lib/onderwijsdata/models/minor.js" type="text/javascript"></script>
+    <script src="../lib/onderwijsdata/models/course.js" type="text/javascript"></script>
+    <script src="../lib/onderwijsdata/models/courseresult.js" type="text/javascript"></script>
+    <script src="../lib/onderwijsdata/models/testresult.js" type="text/javascript"></script>
+    <script src="../lib/onderwijsdata/models/schedule.js" type="text/javascript"></script>
+    
+    <script src="./js/app.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+<body>
+    <div id="header"><h1>Demo application</h1></div>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <div id="nav">
+            <a data-type="persons" href="#persons" class="per block">
+                <div class="content">
+                    <h3>Persons</h3>
+                </div>  
+            </a>
+
+            <a data-type="buildings" href="#buildings" class="block">
+                <div class="content">
+                    <h3>Buildings</h3>
+                </div> 
+            </a>
+        
+            <a data-type="rooms" href="#rooms" class="block">
+                <div class="content">
+                    <h3>Rooms</h3>
+                </div> 
+            </a>
+
+            <a data-type="groups" href="#groups" class="block">
+                <div class="content">
+                    <h3>Groups</h3>
+                </div> 
+            </a>
+            
+            <a data-type="newsfeeds" href="#newsfeeds" class="block">
+                <div class="content">
+                    <h3>News</h3>
+                </div> 
+            </a>
+            
+            <a data-type="schedule" href="#schedule" class="block">
+                <div class="content">
+                    <h3>Schedule</h3>
+                </div> 
+            </a>
+            
+             <a data-type="testresults" href="#testresults" class="block">
+                <div class="content">
+                    <h3>Test results</h3>
+                </div> 
+            </a>
+        </div>
+        
+        <!-- Displays template content -->
+        <div id="page"></div>
+    </div>
+
+    <!-- Uncompiled templates -->
+    <script id="persons" type="text/x-handlebars-template">
+        <h1>Persons</h1>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Mail</th>
+                <th>Telephone</th>
+            </tr>
+            {{#each .}}
+                <tr class="link" onclick="document.location = '#persons={{this.id}}';">
+                    <td>{{this.givenName}} {{this.surName}}</td>
+                    <td>{{this.gender}}</td>
+                    <td>{{this.mail}}</td>
+                    <td>{{this.telephoneNumber}}</td>
+                </tr>
+            {{/each}}
+        </table>
+    </script>
+
+    <script id="persons_detail" type="text/x-handlebars-template">
+        <div id="person" class="detail">
+            <h1>Person details</h1>
+            <div class="thumb"></div>
+            <ul>
+                <li><span>Name:</span>{{this.givenName}} {{this.surName}}</li>
+                <li><span>Gender:</span>{{this.gender}}</li>
+                <li><span>E-mail:</span>{{this.mail}}</li>
+                <li><span>Mobile number:</span>{{this.mobileNumber}}</li>
+                <li><span>Telephone number:</span>{{this.telephoneNumber}}</li>
+                <li><span>Department:</span>{{this.department}}</li>
+                <li><span>Office:</span>{{this.office}}</li>
+                <li><span>Organisation:</span>{{this.organisation}}</li>
+                <li><span>Title:</span>{{this.title}}</li>
+            </ul>
+        </div>
+    </script>
+
+    <script id="buildings" type="text/x-handlebars-template">
+        <div id="building" class="detail">
+            <h1>Buildings</h1>
+            {{#each .}}
+                <h2>{{this.name}} ({{this.abbr}})</h2>
+                <p><i>{{this.description}}</i></p>
+                <ul>
+                    <li><span>Adress:</span>{{this.address}}</li>
+                    <li><span>City:</span>{{this.city}}</li>
+                    <li><span>Postal code:</span>{{this.postalCode}}</li>
+                    <li><span>Lat:</span>{{this.lat}}</li>
+                    <li><span>Lon:</span>{{this.lon}}</li>  
+                </ul>
+            {{/each}}
+        </div>
+    </script>
+
+    <script id="rooms" type="text/x-handlebars-template">
+        <h1>Rooms</h1>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Total seats</th>
+                <th>Total workspaces</th>
+                <th>Available workspaces</th>
+            </tr>
+            {{#each .}}
+                <tr>
+                    <td>{{this.name}}</td>
+                    <td>{{this.totalSeats}}</td>
+                    <td>{{this.totalWorkspaces}}</td>
+                    <td>{{this.availableWorkspaces}}</td>
+                </tr>
+            {{/each}}
+        </table>
+    </script>
+
+    <script id="groups" type="text/x-handlebars-template">
+        <h1>Groups</h1>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+            {{#each .}}
+                <tr class="link" onclick="document.location = '#groups={{this.id}}'";>
+                    <td>{{this.name}}</td>
+                    <td>{{this.description}}</td>
+                </tr>
+            {{/each}}
+        </table>
+    </script>
+
+    <script id="groups_detail" type="text/x-handlebars-template">
+        <div class="detail">
+            <h1>Group - {{this.name}}</h1>
+            <p>{{this.description}}</p>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                </tr>
+                {{#each members}}
+                    <tr class="link" onclick="document.location = '#persons={{this.id}}';">
+                        <td>{{this.displayName}}</td>
+                        <td>{{this.role}}</td>
+                    </tr>
+                {{/each}}
+            </table>
+        </div>
+    </script>
+
+    <script id="grouproles" type="text/x-handlebars-template">
+        <h1>Groups</h1>
+        {{#each .}}
+            <ul>
+                <li>{{this.id}}</li>
+                <li>{{this.group}}</li>
+                <li>{{this.persons}}</li>
+                <li>{{this.role}}</li>
+            </ul>
+        {{/each}}
+    </script>
+
+    <script id="affiliations" type="text/x-handlebars-template">
+        <h1>Affiliations</h1>
+        {{#each .}}
+            <ul>
+                <li><h4>{{this.affiliation}}</h4></li>
+                <ul>
+                    {{#each this.persons}}
+                        <li><a href="#persons={{this.id}}">{{this.givenName}} {{this.surName}}</a></li>
+                    {{/each}}
+                </ul>
+            </ul>
+        {{/each}}
+    </script>
+
+    <script id="newsfeeds" type="text/x-handlebars-template">
+        <h1>News</h1>
+        <h2>News feeds</h2>
+        {{#each .}}
+            <ul>
+                <li><a href="#newsfeeds={{this.id}}"<strong>{{this.title}}</strong></a></li>
+                <li>{{this.description}}</li>
+            </ul>
+        {{/each}}
+        
+        <h2>News items</h2>
+        {{#each .}}
+            {{#each this.items}}
+                <ul>
+                    <li><strong><a href="#newsitems={{this.id}}">{{this.title}}</a></strong></li>
+                </ul>
+            {{/each}}
+        {{/each}}
+    </script>
+
+    <script id="newsfeeds_detail" type="text/x-handlebars-template">
+        <h1>{{this.title}}</h1>
+    
+        <h2>News items</h2>
+        <ul>
+            {{#each this.items}}
+                <li><strong><a href="#newsitems={{this.id}}">{{this.title}}</a></strong></li>
+            {{/each}}
+        </ul>
+    </script>
+
+    <script id="newsitems_detail" type="text/x-handlebars-template">
+        <h1>{{this.title}}</h1>
+        <p>
+            {{this.content}}
+        </p>
+    </script>
+
+    <script id="schedule" type="text/x-handlebars-template">
+        <h1>Schedule</h1>
+        <table>
+            <tr>
+                <th>Start</th>
+                <th>End</th>
+                <th>Description</th>
+                <th>Course</th>
+                <th>Room</th>
+            </tr>
+            {{#each .}}
+                <tr>
+                    <td>{{this.start}}</td>
+                    <td>{{this.end}}</td>
+                    <td>{{this.description}}</td>
+                    <td>{{this.course}}</td>
+                    <td>{{this.room}}</td>
+                </tr>
+            {{/each}}
+        </table>
+    </script>
+
+    <script id="testresults" type="text/x-handlebars-template">
+        <h1>Test results</h1>
+        <table>
+            <tr>
+                <th>Description</th>
+                <th>Data</th>
+                <th>Grade</th>
+            </tr>
+            {{#each .}}
+                <tr class="{{^passed}} failed {{/passed}}">
+                    <td>{{this.description}}</td>
+                    <td>{{this.date}}</td>
+                    <td>{{this.grade}}</td>
+                </tr>
+            {{/each}}
+        </table>
+    </script>
+</body>
+</html>
