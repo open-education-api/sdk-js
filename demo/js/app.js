@@ -13,12 +13,17 @@ $(function() {
         var params = url.split("=");
         var model = params[0];
         var id = params[1];
-            
+
         if (id != null) {
             showView(id, model);
         } else {
             showView(null, model);
         }
+        
+        // Make navigation button active
+        $("#nav a").removeClass("active");
+        var selector = "a[data-type='"+model+"']";
+        $(selector).addClass('active');
     }
 
     // Show view
@@ -106,6 +111,10 @@ $(function() {
 
         var html = template(data);
         $('#page').html(html);
+
+        $('.footable').footable({
+            addRowToggle: false
+        });
     }
 
     // Open persons by default
