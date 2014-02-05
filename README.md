@@ -20,8 +20,8 @@ There's a demo included, which shows an example in how to use the library.
 
 3. Ask for the client you're interested in, example:
     ```javascript
-    var personClient = onderwijsData.personClient();
-    var buildingClient = onderwijsData.buildingClient();
+    var personClient = onderwijsData.createPersonClient();
+    var buildingClient = onderwijsData.createBuildingClient();
     ```
     
 4. Use one of the three methods, to get data:
@@ -58,5 +58,3 @@ Run from the commandline, inside the "/lib/onderwijsdata/" folder
 ```
 cat ./onderwijsdata.js ./tools.js $(ls models/*.js) | java -jar ./compiler.jar --js_output_file onderwijsdate.min.js
 ```
-
-### License

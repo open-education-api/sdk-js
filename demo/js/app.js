@@ -14,7 +14,7 @@ $(function() {
         var model = params[0];
         var id = params[1];
 
-        if (id != null) {
+        if (id != "") {
             showView(id, model);
         } else {
             showView(null, model);
@@ -22,7 +22,7 @@ $(function() {
         
         // Make navigation button active
         $("#nav a").removeClass("active");
-        var selector = "a[data-type='"+model+"']";
+        var selector = "a[data-type='" + model + "']";
         $(selector).addClass('active');
     }
 
@@ -37,6 +37,18 @@ $(function() {
                     if (!("data" in data)) {
                         template += "_detail";
                     }
+
+                    // Insert schedule data for persons and rooms
+                    if (model == "persons" || model == "rooms") {
+                        var schedule = client.scheduleClientById(data.id);
+                        schedule.getList({start : "1997-07-16T19:20:30.45", end : "2014-07-16T19:20:30.45Z"}, function (error, scheduleData) {
+                            if (scheduleData) {
+                                data.schedule = scheduleData.data;
+                                renderTemplate(template, data);
+                            }
+                        })
+                    }
+
                     renderTemplate(template, data);
                 }
             })
@@ -55,47 +67,47 @@ $(function() {
 
         switch(name) {
             case 'persons':
-                client = onderwijsData.personClient();
+                client = onderwijsData.createPersonClient();
             break;
             
             case 'buildings':
-                client = onderwijsData.buildingClient();
+                client = onderwijsData.createBuildingClient();
             break;
             
             case 'rooms':
-                client = onderwijsData.roomClient();
+                client = onderwijsData.createRoomClient();
             break;
             
             case 'groups':
-                client = onderwijsData.groupClient();
+                client = onderwijsData.createGroupClient();
             break;
                             
             case 'newsfeeds':
-                client = onderwijsData.newsFeedClient();
+                client = onderwijsData.createNewsFeedClient();
             break;
             
             case 'newsitems':
-                client = onderwijsData.newsItemClient();
+                client = onderwijsData.createNewsItemClient();
             break;
 
             case 'courses':
-                client = onderwijsData.courseClient();
+                client = onderwijsData.createCourseClient();
             break;
             
             case 'courseresults':
-                client = onderwijsData.courseResultClient();
+                client = onderwijsData.createCourseResultClient();
             break;
             
             case 'minors':
-                client = onderwijsData.minorClient();
+                client = onderwijsData.createMinorClient();
             break;
             
             case 'testresults':
-                client = onderwijsData.testResultClient();
+                client = onderwijsData.createTestResultClient();
             break;
             
             case 'schedule':
-                client = onderwijsData.scheduleClient();
+                client = onderwijsData.createScheduleClient();
             break;
             
             default:
@@ -114,6 +126,15 @@ $(function() {
 
         $('.footable').footable({
             addRowToggle: false
+        });
+        
+        updateDateFormatting();
+    }
+    
+    function updateDateFormatting () {
+        var dateFormat = 'dd/MM HH:mm';
+        $(".dateFormat").each(function (idx, elem) {
+            $(elem).text($.format.date($(elem).text(), dateFormat));
         });
     }
 

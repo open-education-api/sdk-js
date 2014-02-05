@@ -153,6 +153,7 @@ table th {
     background: -o-linear-gradient(top,  #f6f8f9 0%,#ebf0f4 100%);
     background: -ms-linear-gradient(top,  #f6f8f9 0%,#ebf0f4 100%);
     background: linear-gradient(to bottom,  #f6f8f9 0%,#ebf0f4 100%);
+    text-align: left;
 }
 
 td,
