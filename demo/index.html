@@ -25,7 +25,6 @@
             <a data-type="rooms" href="#rooms">Rooms</a>
             <a data-type="groups" href="#groups">Groups</a>
             <a data-type="newsfeeds" href="#newsfeeds">News</a>
-            <a data-type="testresults" class="test-results" href="#testresults">Test results</a>
             <a data-type="courses" href="#courses">Courses</a>
         </div>
         
@@ -98,6 +97,45 @@
                     {{/each}}
                 </tbody>
             </table>
+            
+            <h2>Test results</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th class="hide-phone">Data</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each this.testresults}}
+                        <tr class="{{^passed}} failed {{/passed}}">
+                            <td>{{this.description}}</td>
+                            <td class="hide-phone">{{this.date}}</td>
+                            <td>{{this.grade}}</td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            
+            <h2>Course results</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each this.courseresults}}
+                        <tr class="{{^passed}} failed {{/passed}}">
+                            <td>{{this.course.name}}</td>
+                            <td>{{this.grade}}</td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            
         </div>
     </script>
 
@@ -168,8 +206,8 @@
                 <tbody>
                     {{#each this.schedule}}
                         <tr>
-                            <td>{{this.start}}</td>
-                            <td>{{this.end}}</td>
+                            <td class="dateFormat">{{this.start}}</td>
+                            <td class="dateFormat">{{this.end}}</td>
                             <td>{{this.description}}</td>
                             <td><a href="#courses={{this.course.id}}">{{this.course.abbr}}</a></td>
                             <td><a href="#rooms={{this.room.id}}">{{this.room.name}}</a></td>
@@ -285,28 +323,6 @@
         <p>
             {{this.content}}
         </p>
-    </script>
-
-    <script id="testresults" type="text/x-handlebars-template">
-        <h1>Test results</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Description</th>
-                    <th class="hide-phone">Data</th>
-                    <th>Grade</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each .}}
-                    <tr class="{{^passed}} failed {{/passed}}">
-                        <td>{{this.description}}</td>
-                        <td class="hide-phone">{{this.date}}</td>
-                        <td>{{this.grade}}</td>
-                    </tr>
-                {{/each}}
-            </tbody>
-        </table>
     </script>
     
     <script id="courses" type="text/x-handlebars-template">

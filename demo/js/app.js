@@ -1,11 +1,12 @@
 $(function() {
     // Create new instance of the API library
-    var onderwijsData = new Surfnet.OnderwijsData('http://imogen.surfnet.nl:8001/'); 
-
+    // Demo purposes only, follow OAuth best practices to protect your keys and tokens
+    var onderwijsData = new Surfnet.OnderwijsData("<endpoint url>", "<access-token>"); 
+ 
     // Called when hash changes
     window.onhashchange = function() {
         showViewForHash();
-    }
+    };
 
     // Show view based on current hash
     function showViewForHash() {
@@ -19,7 +20,7 @@ $(function() {
         } else {
             showView(null, model);
         }
-        
+
         // Make navigation button active
         $("#nav a").removeClass("active");
         var selector = "a[data-type='" + model + "']";
@@ -28,36 +29,62 @@ $(function() {
 
     // Show view
     function showView(id, model) {
-        var client = getClientForName(model)
+        var client = getClientForName(model);
         var template = model;
 
         if (id != null) {
-            client.getById(id, function (error, data) {
+            client.getById(id, function(error, data) {
                 if (data) {
                     if (!("data" in data)) {
                         template += "_detail";
                     }
 
-                    // Insert schedule data for persons and rooms
-                    if (model == "persons" || model == "rooms") {
-                        var schedule = client.scheduleClientById(data.id);
-                        schedule.getList({start : "1997-07-16T19:20:30.45", end : "2014-07-16T19:20:30.45Z"}, function (error, scheduleData) {
+                    // Insert schedule, test results and course results
+                    if (model == "persons") {
+                        var scheduleClient = onderwijsData.createScheduleClient();
+                        scheduleClient.getByPersonId(data.id, {start : "1997-07-16T19:20:30.45", end : "2014-07-16T19:20:30.45Z"}, function (error, scheduleData) {
                             if (scheduleData) {
                                 data.schedule = scheduleData.data;
                                 renderTemplate(template, data);
                             }
-                        })
+                        });
+                        
+                        var testResultClient = onderwijsData.createTestResultClient();
+                        testResultClient.getByPersonId(data.id, {start : "1997-07-16T19:20:30.45", end : "2014-07-16T19:20:30.45Z"}, function (error, testresultData) {
+                            if (testresultData) {
+                                data.testresults = testresultData.data;
+                                renderTemplate(template, data);
+                            }
+                        });
+
+                        var courseResultClient = onderwijsData.createCourseResultClient();
+                        courseResultClient.getByPersonId(data.id, {start : "1997-07-16T19:20:30.45", end : "2014-07-16T19:20:30.45Z"}, function (error, courseResultData) {
+                            if (courseResultData) {
+                                data.courseresults = courseResultData.data;
+                                renderTemplate(template, data);
+                            }
+                        });
+                    }
+ 
+                    if (model == "rooms") {
+                        var scheduleClient = onderwijsData.createScheduleClient();
+                        scheduleClient.getByRoomId(data.id, {start : "1997-07-16T19:20:30.45", end : "2014-07-16T19:20:30.45Z"}, function (error, scheduleData) {
+                            if (scheduleData) {
+                                data.schedule = scheduleData.data;
+                                renderTemplate(template, data);
+                            }
+                        });
                     }
 
                     renderTemplate(template, data);
                 }
-            })
+            });
         } else {
             client.getList(function (error, data) {
                 if (data) {
                     renderTemplate(template, data.data);
                 }
-            })
+            });
         }
     }
 

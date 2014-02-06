@@ -39,7 +39,7 @@ There's a demo included, which shows an example in how to use the library.
       }
     })
     
-    personClient.getList({someParamater: "someValue"}, function (error, data) {
+    personClient.getList({someParameter: "someValue"}, function (error, data) {
       if (data !=null) {
         // do something with the data
       }
