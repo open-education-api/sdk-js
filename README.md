@@ -8,10 +8,10 @@ Because of the Same-origin policy, the application should be run from the same d
 ## Usage
 There's a demo included, which shows an example in how to use the library.
 
-1. Start by including the onderwijsdate.min.js file in your page:
+1. Start by including the onderwijsdata.min.js file in your page:
 
     ```html
-    <script src="onderwijsdate.min.js" type="text/javascript"></script>
+    <script src="onderwijsdata.min.js" type="text/javascript"></script>
     ```
 
 2. Create a new onderwijsdata object:
@@ -92,5 +92,5 @@ To minify the Javascript files use the Google Closure Compiler, available at htt
 
 Run from the commandline, inside the "/lib/onderwijsdata/" folder
 ```
-cat ./onderwijsdata.js ./tools.js $(ls models/*.js) | java -jar ./compiler.jar --js_output_file onderwijsdate.min.js
+cat ./onderwijsdata.js ./tools.js $(ls models/*.js) | java -jar ./compiler.jar --js_output_file onderwijsdata.min.js
 ```
