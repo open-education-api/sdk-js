@@ -3,7 +3,9 @@ OpenOnderwijsAPI-js
 
 This is the Javascript API used for communicating with the Open Educational API from SURFnet.
 
-### Usage
+Because of the Same-origin policy, the application should be run from the same domain as the API or use a proxy to forward calls to the real API domain.
+
+## Usage
 There's a demo included, which shows an example in how to use the library.
 
 1. Start by including the onderwijsdate.min.js file in your page:
@@ -14,10 +16,13 @@ There's a demo included, which shows an example in how to use the library.
 
 2. Create a new onderwijsdata object:
 
-    ```javascript
-    var onderwijsData = new Surfnet.OnderwijsData("<your endpoint URL>");
-    ```
+    Take a look a the [API documentation](https://github.com/baszoetekouw/OpenOnderwijsAPI), for more information on how to generate an OAuth access token.
+   
 
+    ```javascript
+    var onderwijsData = new Surfnet.OnderwijsData("<your endpoint URL>, <OAuth access token>");
+    ```
+ 
 3. Ask for the client you're interested in, example:
     ```javascript
     var personClient = onderwijsData.createPersonClient();
@@ -27,27 +32,58 @@ There's a demo included, which shows an example in how to use the library.
 4. Use one of the three methods, to get data:
     
     ```javascript
-    getList (params, callback) // Get first result set from API
-    get (url, params, callback) // Get one entity by using an API provided url
-    getById (id, params, callback) // Get one entity by using an id
+    getList(params, callback) // Get first result set from API
+    get(url, params, callback) // Get one entity by using an API provided url
+    getById(id, params, callback) // Get one entity by using an id
     ```
 
     ```javascript
     personClient.getList(function (error, data) {
-      if (data !=null) {
+      if (data != null) {
         // do something with the data
       }
     })
     
     personClient.getList({someParameter: "someValue"}, function (error, data) {
-      if (data !=null) {
+      if (data != null) {
         // do something with the data
       }
     })
     ```
 
+## Special cases
 
-### Contributing
+Some clients have extra methods to retrieve specific data:
+#### Schedule:
+```javascript
+var scheduleClient = onderwijsData.createScheduleClient();
+getByOwner(url, paramaters, callback);
+getByPersonId(id, paramaters, callback);
+getByRoomId(id, paramaters, callback);
+```
+
+#### Course result:
+```javascript
+var courseResultClient = onderwijsData.createCourseResultClient();
+getByOwner(url, paramaters, callback);
+getByPersonId(id, paramaters, callback);
+```
+
+#### Test result:
+```javascript
+var testResultClient = onderwijsData.createTestResultClient();
+getByOwner(url, paramaters, callback);
+getByPersonId(id, paramaters, callback);
+```
+
+``` getByOwner ``` is used to pass in a URL reference from the entity you want the related data from:
+```javascript
+// Example URL from the persons API data
+var personUrl = "http://localhost:8000/persons/2";
+scheduleClient.getByOwner(personUrl, null, function (error, data) {});
+```
+
+## Contributing
 
 You're welcome to contribute to this code by making pull requests.
 The source is located in the lib folder. Don't forget to also update the demo (if necessary) so we always have a working example.
