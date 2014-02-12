@@ -5,8 +5,20 @@ This is the Javascript API used for communicating with the Open Educational API 
 
 Because of the Same-origin policy, the application should be run from the same domain as the API or use a proxy to forward calls to the real API domain.
 
-## Usage
-There's a demo included, which shows an example in how to use the library.
+## Demo
+
+There's a demo included, which shows an example in how to use the library. To run it:
+
+* If you're running the reference python server (https://github.com/baszoetekouw/OpenOnderwijsAPI) on localhost:8000:
+    * No need to do anything, just run index.html
+* If you're running the api somewhere else: 
+    * edit demo/app.js 
+    * add your API endpoint in the placeholder near the top of the file. (the one that says <your endpoint url here>).
+    * browse demo/index.html in a browser.
+
+## General Usage
+
+To use the library in a project, you would typically follow these steps:
 
 1. Start by including the onderwijsdata.min.js file in your page:
 

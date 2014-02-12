@@ -1,7 +1,11 @@
 $(function() {
     // Create new instance of the API library
     // Demo purposes only, follow OAuth best practices to protect your keys and tokens
-    var onderwijsData = new Surfnet.OnderwijsData("<endpoint url>", "<access-token>"); 
+    // The default setting connects to localhost:8000 (if you're running the reference implementation server)
+    var onderwijsData = new Surfnet.OnderwijsData("http://localhost:8000"); 
+
+    // If you have oauth auth in place, you can pass the token like so:
+    // var onderwijsData = new Surfnet.OnderwijsData("<your api endpoint here>", "<your oauth access token here>");
  
     // Called when hash changes
     window.onhashchange = function() {
