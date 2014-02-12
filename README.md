@@ -9,7 +9,7 @@ Because of the Same-origin policy, the application should be run from the same d
 
 There's a demo included, which shows an example in how to use the library. To run it:
 
-* If you're running the reference python server on localhost:8000:
+* If you're running the reference python server (https://github.com/baszoetekouw/OpenOnderwijsAPI) on localhost:8000:
     * No need to do anything, just run index.html
 * If you're running the api somewhere else: 
     * edit demo/app.js 
