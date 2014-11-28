@@ -58,6 +58,30 @@
             </tbody>
         </table>
         <div class="search-map" data-latitude="52.355133" data-longitude="5.616567"></div>
+        <form class="search-form" data-model="persons">
+            <div class="clearfix">
+                <div class="control-group left">
+                    <input name="lat" type="text" placeholder="Latitude (52.355133)">
+                </div>
+                <div class="control-group left">
+                    <input name="lon" type="text" placeholder="Longitude (5.616567)">
+                </div>
+                <div class="control-group left">
+                    <label class="custom-select">
+                        <select name="r">
+                            <option value="100">Within 100 Meters</option>
+                            <option value="200">Within 200 Meters</option>
+                            <option value="500">Within 500 Meters</option>
+                            <option value="1000">Within 1 Kilometer</option>
+                            <option value="2000">Within 2 Kilometers</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="control-group right">
+                    <button type="submit">Search</button>
+                </div>
+            </div>
+        </form>
     </script>
 
     <script id="persons_detail" type="text/x-handlebars-template">
@@ -171,6 +195,30 @@
                 </tbody>
             </table>
             <div class="search-map" data-latitude="52.355133" data-longitude="5.616567"></div>
+            <form class="search-form" data-model="buildings">
+            <div class="clearfix">
+                <div class="control-group left">
+                    <input name="lat" type="text" placeholder="Latitude (52.355133)">
+                </div>
+                <div class="control-group left">
+                    <input name="lon" type="text" placeholder="Longitude (5.616567)">
+                </div>
+                <div class="control-group left">
+                    <label class="custom-select">
+                        <select name="r">
+                            <option value="100">Within 100 Meters</option>
+                            <option value="200">Within 200 Meters</option>
+                            <option value="500">Within 500 Meters</option>
+                            <option value="1000">Within 1 Kilometer</option>
+                            <option value="2000">Within 2 Kilometers</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="control-group right">
+                    <button type="submit">Search</button>
+                </div>
+            </div>
+        </form>
         </div>
     </script>
 
