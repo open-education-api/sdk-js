@@ -57,25 +57,27 @@
                 {{/each}}
             </tbody>
         </table>
+        <div class="search-map" data-latitude="52.355133" data-longitude="5.616567"></div>
     </script>
 
     <script id="persons_detail" type="text/x-handlebars-template">
         <div id="person" class="detail">
             <h1>Person details</h1>
-            <div class="thumb"></div>
-            <ul>
-                <li><span>Name:</span>{{this.givenName}} {{this.surName}}</li>
-                <li><span>Gender:</span>{{this.gender}}</li>
-                <li><span>E-mail:</span>{{this.mail}}</li>
-                <li><span>Mobile number:</span>{{this.mobileNumber}}</li>
-                <li><span>Telephone number:</span>{{this.telephoneNumber}}</li>
-                <li><span>Department:</span>{{this.department}}</li>
-                <li><span>Office:</span>{{this.office}}</li>
-                <li><span>Organisation:</span>{{this.organisation}}</li>
-                <li><span>Title:</span>{{this.title}}</li>
-            </ul>
-            <div class="map" data-latitude="{{this.lat}}" data-longitude="{{this.lon}}"></div>
-            <div style="clear:both"></div>
+            <div class="clearfix">
+                <div class="thumb left"></div>
+                <ul class="left">
+                    <li><span>Name:</span>{{this.givenName}} {{this.surName}}</li>
+                    <li><span>Gender:</span>{{this.gender}}</li>
+                    <li><span>E-mail:</span>{{this.mail}}</li>
+                    <li><span>Mobile number:</span>{{this.mobileNumber}}</li>
+                    <li><span>Telephone number:</span>{{this.telephoneNumber}}</li>
+                    <li><span>Department:</span>{{this.department}}</li>
+                    <li><span>Office:</span>{{this.office}}</li>
+                    <li><span>Organisation:</span>{{this.organisation}}</li>
+                    <li><span>Title:</span>{{this.title}}</li>
+                </ul>
+                <div class="map right" data-latitude="{{this.lat}}" data-longitude="{{this.lon}}"></div>
+            </div>
             <h2>Schedule</h2>
             <table class="footable">
                 <thead>
@@ -168,6 +170,7 @@
                     {{/each}}
                 </tbody>
             </table>
+            <div class="search-map" data-latitude="52.355133" data-longitude="5.616567"></div>
         </div>
     </script>
 
