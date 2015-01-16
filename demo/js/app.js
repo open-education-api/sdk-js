@@ -160,12 +160,33 @@ $(function() {
         });
         
         updateDateFormatting();
+        initializeDetailMap();
     }
     
     function updateDateFormatting () {
         var dateFormat = 'dd/MM HH:mm';
         $(".dateFormat").each(function (idx, elem) {
             $(elem).text($.format.date($(elem).text(), dateFormat));
+        });
+    }
+
+    function initializeDetailMap () {
+        $('.map').each(function() {
+            var $map = $(this);
+
+            var lat_lng = new google.maps.LatLng($map.data('latitude'),$map.data('longitude'));
+
+            var options = {
+                center: lat_lng,
+                zoom: 13
+            };
+
+            var map = new google.maps.Map(this, options);
+
+            new google.maps.Marker({
+                position: lat_lng,
+                map: map
+            });
         });
     }
 
