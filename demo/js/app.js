@@ -160,6 +160,7 @@ $(function() {
         });
         
         updateDateFormatting();
+        initializeSearchMap(model);
         initializeDetailMap();
     }
     
@@ -168,6 +169,58 @@ $(function() {
         $(".dateFormat").each(function (idx, elem) {
             $(elem).text($.format.date($(elem).text(), dateFormat));
         });
+    }
+
+    function initializeSearchMap () {
+        var $map = $('.search-map'),
+            $form = $('.search-form');
+
+        if ($map.length > 0) {
+            var lat_lng = new google.maps.LatLng($map.data('latitude'),$map.data('longitude'));
+
+            var options = {
+                center: lat_lng,
+                zoom: 13
+            };
+
+            var map = new google.maps.Map($map.get(0), options);
+
+            /**
+            new google.maps.Marker({
+                position: lat_lng,
+                map: map
+            });
+             */
+        }
+
+        if ($form.length > 0) {
+            $form.on('submit', function(e) {
+                e.preventDefault();
+
+                var $form = $(this),
+                    client = getClientForName($form.data('model')),
+                    params = {
+                        'll': $form.find('input[name=lon]').val() + ',' + $form.find('input[name=lat]').val(),
+                        'r': $form.find('select[name=r]').val()
+                    };
+
+                client.getByLocation(params, function (error, markerData) {
+                    if (markerData) {
+                        for (var i in markerData) {
+                            var data = markerData[i];
+
+                            var lat_lng = new google.maps.LatLng(data.lat,data.lon);
+
+                            new google.maps.Marker({
+                                position: lat_lng,
+                                map: map,
+                                title: data.name
+                            });
+                        }
+                    }
+                });
+            });
+        }
     }
 
     function initializeDetailMap () {
