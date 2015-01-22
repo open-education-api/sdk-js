@@ -9,7 +9,7 @@ Because of the Same-origin policy, the application should be run from the same d
 
 There's a demo included, which shows an example in how to use the library. To run it:
 
-* If you're running the reference python server (https://github.com/baszoetekouw/OpenOnderwijsAPI) on localhost:8000:
+* If you're running the reference python server (https://github.com/SURFnet/OpenOnderwijsAPI) on localhost:8000:
     * No need to do anything, just run index.html
 * If you're running the api somewhere else: 
     * edit demo/app.js 
@@ -28,7 +28,7 @@ To use the library in a project, you would typically follow these steps:
 
 2. Create a new onderwijsdata object:
 
-    Take a look a the [API documentation](https://github.com/baszoetekouw/OpenOnderwijsAPI), for more information on how to generate an OAuth access token.
+    Take a look a the [API documentation](https://github.com/SURFnet/OpenOnderwijsAPI), for more information on how to generate an OAuth access token.
    
 
     ```javascript
