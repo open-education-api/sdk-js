@@ -1,6 +1,12 @@
 OpenOnderwijsAPI-js
 ===================
 
+## Deprecation notice
+
+**This SDK is outdated and will not be maintained. Please use the [API specification](https://github.com/open-education-api/specification).**  
+
+---
+
 This is the Javascript API used for communicating with the Open Educational API from SURFnet.
 
 Because of the Same-origin policy, the application should be run from the same domain as the API or use a proxy to forward calls to the real API domain.
